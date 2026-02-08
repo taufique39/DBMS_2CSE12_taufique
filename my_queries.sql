@@ -1,0 +1,106 @@
+-- use database
+USE taufique_2cse12;
+
+-- Disable foreign key checks
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Drop table if exists
+DROP TABLE IF EXISTS EMPLOYEE;
+DROP TABLE IF EXISTS DEPARTMENT;
+
+-- Enable foreign key checks
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- Create table DEPARTMENT
+CREATE TABLE DEPARTMENT (
+    DEPTNO INT(2) PRIMARY KEY,
+    DNAME VARCHAR(15) NOT NULL
+);
+
+-- insert values in table_DEPARTMENT
+INSERT INTO DEPARTMENT (DEPTNO, DNAME) VALUES
+(10, 'RESEARCH'),
+(20, 'ACCOUNTING'),
+(30, 'SALES'),
+(40, 'OPERATIONS');
+
+-- Create table EMPLOYEE
+CREATE TABLE EMPLOYEE (
+    EMPNO INT(4) PRIMARY KEY,
+    ENAME VARCHAR(20) NOT NULL,
+    JOB VARCHAR(20),
+    MGR INT(4),
+    HIREDATE DATE,
+    SAL DECIMAL(10,2),
+    COMM DECIMAL(7,2),
+    DEPTNO INT(2),
+    FOREIGN KEY (DEPTNO) REFERENCES DEPARTMENT(DEPTNO)
+);
+
+-- insert values in table_EMPLOYEE
+INSERT INTO employee VALUES
+(7369, 'SMITH', 'CLERK', 7902, '1980-12-17', 800,  NULL, 20),
+(7499, 'ALLEN', 'SALESMAN', 7698, '1981-02-20', 1600, 300, 30),
+(7521, 'WARD', 'SALESMAN', 7698, '1981-02-22', 1250, 300, 30),
+(7566, 'JONES', 'MANAGER', 7839, '1981-04-02', 2975, NULL, 20),
+(7654, 'MARTIN', 'SALESMAN', 7698, '1981-09-28', 1250, 1400, 30),
+(7698, 'BLAKE', 'MANAGER', 7839, '1981-05-01', 2850, NULL, 30),
+(7782, 'CLARK', 'MANAGER', 7839, '1981-06-09', 2450, NULL, 20),
+(7788, 'SCOTT', 'ANALYST', 7566, '1982-12-09', 3000, NULL, 40),
+(7839, 'KING', 'PRESIDENT', NULL, '1981-11-17', 5000, NULL, 20),
+(7844, 'TURNER', 'SALESMAN', 7698, '1981-09-08', 1500, 0, 30),
+(7876, 'ADAMS', 'CLERK', 7788, '1983-01-12', 1100, NULL, 20),
+(7900, 'JAMES', 'CLERK', 7698, '1981-12-03', 950, NULL, 30),
+(7902, 'FORD', 'ANALYST', 7566, '1981-12-03', 3000, NULL, 20),
+(7934, 'MILLER', 'CLERK', 7782, '1981-12-03', 3000, NULL, 20);
+
+-- Q1
+SELECT DISTINCT job
+FROM employee;
+
+-- Q2
+SELECT *
+FROM employee
+WHERE deptno = 30;
+
+-- Q3
+SELECT DISTINCT deptno
+FROM employee
+WHERE deptno > 20;
+-- Q4
+SELECT *
+FROM employee
+WHERE deptno = 30
+AND job IN ('MANAGER', 'CLERK');
+
+-- Q5
+SELECT ename, empno, deptno
+FROM employee
+WHERE job = 'CLERK';
+
+-- Q6
+SELECT *
+FROM employee
+WHERE job = 'MANAGER'
+AND deptno <> 30;
+
+-- Q7
+SELECT *
+FROM employee
+WHERE deptno = 10
+AND job NOT IN ('MANAGER', 'CLERK');
+
+-- Q8
+SELECT ename, job, sal
+FROM employee
+WHERE sal BETWEEN 1200 AND 1400;
+
+-- Q9
+SELECT ename, deptno
+FROM employee
+WHERE job IN ('CLERK', 'ANALYST', 'SALESMAN');
+
+-- Q10
+SELECT ename, deptno
+FROM employee
+WHERE ename LIKE 'M%';
