@@ -54,53 +54,53 @@ INSERT INTO employee VALUES
 (7902, 'FORD', 'ANALYST', 7566, '1981-12-03', 3000, NULL, 20),
 (7934, 'MILLER', 'CLERK', 7782, '1981-12-03', 3000, NULL, 20);
 
--- Q1
+-- Q1 List all distinct jobs in Employee
 SELECT DISTINCT job
 FROM employee;
 
--- Q2
+-- Q2 List all information about employees in department number 30
 SELECT *
 FROM employee
 WHERE deptno = 30;
 
--- Q3
+-- Q3 Find all department numbers greater than 20
 SELECT DISTINCT deptno
 FROM employee
 WHERE deptno > 20;
--- Q4
+-- Q4 Find all information about managers as well as clerks in department 30
 SELECT *
 FROM employee
 WHERE deptno = 30
 AND job IN ('MANAGER', 'CLERK');
 
--- Q5
+-- Q5 List employee name, employee number and department of all clerks
 SELECT ename, empno, deptno
 FROM employee
 WHERE job = 'CLERK';
 
--- Q6
+-- Q6 Find all managers not in department 30
 SELECT *
 FROM employee
 WHERE job = 'MANAGER'
 AND deptno <> 30;
 
--- Q7
+-- Q7 List information about employees in department 10 who are not managers or clerks
 SELECT *
 FROM employee
 WHERE deptno = 10
 AND job NOT IN ('MANAGER', 'CLERK');
 
--- Q8
+-- Q8 Find employees and jobs earning between 1200 and 1400
 SELECT ename, job, sal
 FROM employee
 WHERE sal BETWEEN 1200 AND 1400;
 
--- Q9
+-- Q9 List name and department number of employees who are clerks, analysts, or salesmen
 SELECT ename, deptno
 FROM employee
 WHERE job IN ('CLERK', 'ANALYST', 'SALESMAN');
 
--- Q10
+-- Q10 List name and department number of employees whose names begin with 'M'
 SELECT ename, deptno
 FROM employee
 WHERE ename LIKE 'M%';
